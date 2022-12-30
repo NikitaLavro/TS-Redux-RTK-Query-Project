@@ -4,7 +4,7 @@ import { IPost } from "../models/IPost";
 export const postAPI = createApi({
   reducerPath: "postAPI",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://jsonplaceholder.typicode.com/",
+    baseUrl: "http://localhost:5000/",
   }),
   endpoints: (build) => ({
     fetchAllPosts: build.query<IPost[], number>({
@@ -15,7 +15,14 @@ export const postAPI = createApi({
         },
       }),
     }),
+    createPost: build.mutation<IPost, IPost>({
+      query: (post) => ({
+        url: "/posts",
+        method: "POST",
+        body: post,
+      }),
+    }),
   }),
 });
 
-export const { useFetchAllPostsQuery } = postAPI;
+export const { useFetchAllPostsQuery, useCreatePostMutation } = postAPI;

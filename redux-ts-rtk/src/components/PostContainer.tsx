@@ -10,7 +10,7 @@ const PostContainer = () => {
     error,
     isLoading,
     refetch,
-  } = postAPI.useFetchAllPostsQuery(limit);
+  } = postAPI.useFetchAllPostsQuery(5);
 
   useEffect(() => {}, []);
 
