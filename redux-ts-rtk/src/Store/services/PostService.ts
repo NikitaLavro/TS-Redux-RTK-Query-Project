@@ -25,7 +25,28 @@ export const postAPI = createApi({
       }),
       invalidatesTags: ["Post"],
     }),
+    updatePost: build.mutation<IPost, IPost>({
+      query: (post) => ({
+        url: `/posts/${post.id}`,
+        method: "PUT",
+        body: post,
+      }),
+      invalidatesTags: ["Post"],
+    }),
+    deletePost: build.mutation<IPost, IPost>({
+      query: (post) => ({
+        url: `/posts/${post.id}`,
+        method: "DELETE",
+        body: post,
+      }),
+      invalidatesTags: ["Post"],
+    }),
   }),
 });
 
-export const { useFetchAllPostsQuery, useCreatePostMutation } = postAPI;
+export const {
+  useFetchAllPostsQuery,
+  useCreatePostMutation,
+  useUpdatePostMutation,
+  useDeletePostMutation,
+} = postAPI;
