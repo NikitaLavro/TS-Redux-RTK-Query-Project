@@ -6,6 +6,7 @@ export const postAPI = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5000/",
   }),
+  tagTypes: ["Post"],
   endpoints: (build) => ({
     fetchAllPosts: build.query<IPost[], number>({
       query: (limit: number = 5) => ({
@@ -14,6 +15,7 @@ export const postAPI = createApi({
           _limit: limit,
         },
       }),
+      providesTags: (result) => ["Post"],
     }),
     createPost: build.mutation<IPost, IPost>({
       query: (post) => ({
@@ -21,6 +23,7 @@ export const postAPI = createApi({
         method: "POST",
         body: post,
       }),
+      invalidatesTags: ["Post"],
     }),
   }),
 });

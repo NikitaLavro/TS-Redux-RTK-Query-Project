@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from "react";
+import { IPost } from "../Store/models/IPost";
 import { postAPI } from "../Store/services/PostService";
 
 import PostItem from "./PostItem";
 
 const PostContainer = () => {
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(10);
   const {
     data: posts,
     error,
     isLoading,
     refetch,
-  } = postAPI.useFetchAllPostsQuery(5);
+  } = postAPI.useFetchAllPostsQuery(limit);
+  const [createPost, {}] = postAPI.useCreatePostMutation();
 
-  useEffect(() => {}, []);
+  const handleCreate = async () => {
+    const title = prompt();
+    await createPost({ title, body: title } as IPost);
+  };
 
   return (
     <div>
       <div className="post__list">
-        <button onClick={() => refetch()}>Refetch</button>
+        <button onClick={() => handleCreate()}>Add new post</button>
         {isLoading && <h1>Loading...</h1>}
         {error && <h1>Something went wrong...</h1>}
         {posts && posts.map((post) => <PostItem key={post.id} post={post} />)}
