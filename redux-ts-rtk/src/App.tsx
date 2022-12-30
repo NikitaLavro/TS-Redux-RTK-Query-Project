@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
+import PostContainer from "./components/PostContainer";
 
 //Hooks
 import { useAppDispatch, useAppSelector } from "./Store/hooks/redux";
@@ -18,9 +19,7 @@ function App() {
 
   return (
     <div className="App">
-      {isLoading && <h1>Loading</h1>}
-      {error && <h1>{error}</h1>}
-      {JSON.stringify(users)}
+      <PostContainer />
     </div>
   );
 }
